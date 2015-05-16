@@ -46,12 +46,18 @@
                                 <state key="normal" image="SearchIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="searchPhotosByPhraseButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A3Z-OF-wps"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n2U-QZ-36Q">
                                 <rect key="frame" x="543" y="425" width="32" height="32"/>
                                 <state key="normal" image="SearchIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="searchPhotosByLatLonButtonTouchUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FFb-jY-tQa"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tzO-nZ-pds">
                                 <rect key="frame" x="16" y="370" width="510" height="30"/>
@@ -123,6 +129,14 @@
                             <constraint firstItem="feX-hf-SUW" firstAttribute="top" secondItem="tzO-nZ-pds" secondAttribute="bottom" constant="26" id="y9W-re-gHR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="defaultLabel" destination="zUp-kj-l7Y" id="xGo-Ub-zio"/>
+                        <outlet property="latitudeTextField" destination="feX-hf-SUW" id="u9Z-7A-gE2"/>
+                        <outlet property="longitudeTextField" destination="OUM-w3-1BS" id="5ih-vP-9in"/>
+                        <outlet property="photoImageView" destination="QMS-iu-2er" id="FvL-Ps-2Yq"/>
+                        <outlet property="photoTitleLabel" destination="iU9-lg-zTU" id="QPU-p9-VqY"/>
+                        <outlet property="phraseTextField" destination="tzO-nZ-pds" id="luC-pH-Kis"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
