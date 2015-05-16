@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SleepInTheLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,8 +16,69 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iop-jG-fIt">
+                                <rect key="frame" x="16" y="550" width="568" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U0R-6S-FgX">
+                                <rect key="frame" x="16" y="58" width="568" height="484"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sleeping in the Library" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fkp-fZ-vRL">
+                                <rect key="frame" x="16" y="20" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1P-6Z-zSI">
+                                <rect key="frame" x="16" y="558" width="568" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Refresh">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchRefreshButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DbP-7X-UI5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.50858454639999995" green="0.56474545440000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Fkp-fZ-vRL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="51C-Ad-EaY"/>
+                            <constraint firstItem="U0R-6S-FgX" firstAttribute="trailing" secondItem="Fkp-fZ-vRL" secondAttribute="trailing" id="7SX-Rk-IPg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Fkp-fZ-vRL" secondAttribute="trailing" id="AwR-ui-A28"/>
+                            <constraint firstItem="h1P-6Z-zSI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="G41-lC-uIo"/>
+                            <constraint firstItem="h1P-6Z-zSI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iop-jG-fIt" secondAttribute="bottom" constant="8" symbolic="YES" id="Had-Fo-hMx"/>
+                            <constraint firstItem="iop-jG-fIt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JW5-jj-kct"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iop-jG-fIt" secondAttribute="trailing" id="KV0-eD-azz"/>
+                            <constraint firstItem="U0R-6S-FgX" firstAttribute="top" secondItem="Fkp-fZ-vRL" secondAttribute="bottom" constant="8" symbolic="YES" id="Mx7-c5-f0V"/>
+                            <constraint firstItem="Fkp-fZ-vRL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Ozs-CF-olz"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="h1P-6Z-zSI" secondAttribute="bottom" constant="8" symbolic="YES" id="RMs-qt-5Ob"/>
+                            <constraint firstAttribute="centerY" secondItem="U0R-6S-FgX" secondAttribute="centerY" id="SdO-J3-cIi"/>
+                            <constraint firstItem="U0R-6S-FgX" firstAttribute="leading" secondItem="Fkp-fZ-vRL" secondAttribute="leading" id="SiW-RI-Dfp"/>
+                            <constraint firstItem="iop-jG-fIt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Vhy-u2-fYt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iop-jG-fIt" secondAttribute="trailing" id="amf-4Q-B90"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="h1P-6Z-zSI" secondAttribute="trailing" id="bpa-Oo-WT8"/>
+                            <constraint firstAttribute="centerX" secondItem="h1P-6Z-zSI" secondAttribute="centerX" id="bs3-T7-5Ax"/>
+                            <constraint firstItem="h1P-6Z-zSI" firstAttribute="top" secondItem="iop-jG-fIt" secondAttribute="bottom" constant="8" symbolic="YES" id="dyO-yF-sqV"/>
+                            <constraint firstItem="U0R-6S-FgX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="iqa-Jg-c5N"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="U0R-6S-FgX" secondAttribute="trailing" id="oTp-Tv-dS4"/>
+                            <constraint firstItem="iop-jG-fIt" firstAttribute="top" secondItem="U0R-6S-FgX" secondAttribute="bottom" constant="8" symbolic="YES" id="t8j-kV-GgB"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="iqa-Jg-c5N"/>
+                                <exclude reference="oTp-Tv-dS4"/>
+                                <exclude reference="JW5-jj-kct"/>
+                                <exclude reference="KV0-eD-azz"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="photoImageView" destination="U0R-6S-FgX" id="zmg-Ql-ZtP"/>
+                        <outlet property="photoTitle" destination="iop-jG-fIt" id="hlR-x5-iin"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
