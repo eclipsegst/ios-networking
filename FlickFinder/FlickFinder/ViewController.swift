@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     let BASE_URL = "https://api.flickr.com/services/rest/"
     let METHOD_NAME = "flickr.galleries.getPhotos"
-    let API_KEY = ""
+    let API_KEY = "4f0751e10b9484ba6bf492246cb44aab"
     let GALLERY_ID = "5704-72157622566655097"
     let EXTRAS = "url_m"
     let DATA_FORMAT = "json"
@@ -69,7 +69,55 @@ class ViewController: UIViewController {
             } else {
                 var parsingError: NSError? = nil
                 let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                
                 println(parsedResult.valueForKey("photos"))
+                
+                // Get the photos dictionary
+                if let photosDictionary = parsedResult.valueForKey("photos") as? [String:AnyObject] {
+
+                    // Determine the total number of photos
+                    var totalPhotosVal = 0
+                    if let totalPhotos = photosDictionary["total"] as? Int {
+                        totalPhotosVal = totalPhotos
+                    }
+                    
+                    println("totalPhotosVal = \(totalPhotosVal)")
+                    
+                    // Grab a photo if photos are returned
+                    if totalPhotosVal > 0 {
+                        if let photosArray = photosDictionary["photo"] as? [[String: AnyObject]] {
+                            
+                            // Get a random index, and pick a random photo's dictionary
+                            let randomPhotoIndex = Int(arc4random_uniform(UInt32(photosArray.count)))
+                            let photoDictionary = photosArray[randomPhotoIndex] as [String: AnyObject]
+                            
+                            // Prepare the UI updates
+                            let photoTitle = photoDictionary["title"] as? String
+                            let imageUrlString = photoDictionary["url_m"] as? String
+                            let imageURL = NSURL(string: imageUrlString!)
+                            
+                            // Update the UI on the main thread
+                            if let imageData = NSData(contentsOfURL: imageURL!) {
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    println("Success, update the UI here...")
+                                    self.photoImageView.image = UIImage(data: imageData)
+                                    self.photoTitleLabel.text = photoTitle
+                                    self.defaultLabel.text = ""
+                                })
+                            } else {
+                                println("Image does not exist at \(imageURL)")
+                            }
+                        } else {
+                            println("Cannot find key 'photo' in \(photosDictionary)")
+                        }
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            println("Failure, update the UI here...")
+                        })
+                    }
+                } else {
+                    println("Cannot find key 'photos' in \(parsedResult)")
+                }
             }
         }
         
