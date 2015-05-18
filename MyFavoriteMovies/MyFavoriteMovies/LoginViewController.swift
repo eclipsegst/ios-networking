@@ -102,7 +102,7 @@ class LoginViewController: UIViewController {
     func loginWithToken(requestToken: String) {
         
         // TASK: Login, then get a session id
-        println("Start loginWithToken")
+        
         // 1. Set the parameters
         let methodParameters = [
             "api_key": appDelegate.apiKey,
@@ -133,11 +133,9 @@ class LoginViewController: UIViewController {
                 // 6. Use the data
                 if let success = parsedResult["success"] as? Bool {
                     if success {
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.debugTextLabel.text = "Login complete!"
-                        }
-
-                        println("Login complete!")
+                        
+                        self.getSessionID(self.appDelegate.requestToken!)
+                        
                     } else {
                         println("Login failed. Cannot find success in \(parsedResult)")
                     }
@@ -160,6 +158,107 @@ class LoginViewController: UIViewController {
         task.resume()
     }
 
+    func getSessionID(requestToken: String) {
+        
+        // 1. Set the parameters
+        let methodParameters = [
+            "api_key": appDelegate.apiKey,
+            "request_token": requestToken
+        ]
+        
+        // 2. Build the URL
+        let urlString = appDelegate.baseURLString + "authentication/session/new" + appDelegate.escapedParameters(methodParameters)
+        let url = NSURL(string: urlString)!
+        
+        // 3. Configure the request
+        let request = NSMutableURLRequest(URL: url)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        // 4. Make the request
+        let task = session.dataTaskWithRequest(request) { data, response, downloadError in
+            if let error = downloadError {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.debugTextLabel.text = "Login Failed (Session ID)."
+                }
+                println("Could not complete the request \(error)")
+            } else {
+                // 5. Parse the data
+                var parsingError: NSError? = nil
+                let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                
+                // 6. Use the data
+                if let sessionID = parsedResult["session_id"] as? String {
+                    self.appDelegate.sessionID = sessionID
+                    self.getUserID(self.appDelegate.sessionID!)
+                    println("getSessionID: \(sessionID)")
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.debugTextLabel.text = "Login Failed (Session ID)."
+                    }
+                    println("Could not find session_id in \(parsedResult)")
+                }
+            }
+        }
+        
+        // 7. Start the request
+        task.resume()
+        
+    }
+    
+    func getUserID(session_id : String) {
+        
+        // 1. Set the parameters
+        let methodParameters = [
+            "api_key": appDelegate.apiKey,
+            "session_id": session_id
+        ]
+        
+        // 2. Build the URL
+        let urlString = appDelegate.baseURLSecureString + "account" + appDelegate.escapedParameters(methodParameters)
+        let url = NSURL(string: urlString)!
+        
+        // 3. Configure the request
+        let request = NSMutableURLRequest(URL: url)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        // 4. Make the request
+        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+            if let error = downloadError {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.debugTextLabel.text = " Login Failed (User ID)"
+                }
+                println("Could not complete the request \(error)")
+            } else {
+                
+                // 5. Parse the data
+                var parsingError: NSError? = nil
+                let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                
+                // 6. Use the data
+                if let userID = parsedResult["id"] as? Int {
+                    self.appDelegate.userID = userID
+                    self.completeLogin()
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.debugTextLabel.text = "Login Failed (User ID)"
+                    }
+                    println("Could not find id \(parsedResult)")
+                }
+            }
+        }
+        
+        // 7. Start the request
+        task.resume()
+    }
+    
+    func completeLogin() {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.debugTextLabel.text = ""
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MoviesTabBarController") as! UITabBarController
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
