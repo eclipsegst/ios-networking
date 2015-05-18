@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="MyFavoriteMovies" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_128.png" translatesAutoresizingMaskIntoConstraints="NO" id="N4A-ZX-Wm2">
+                                <rect key="frame" x="236" y="50" width="128" height="128"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Favorite Movies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGf-rE-Ese">
+                                <rect key="frame" x="198" y="188" width="205" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="GQj-Lh-OhP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubE-dr-6zR">
+                                <rect key="frame" x="175" y="341" width="250" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="hwd-cx-mcy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WiY-uj-ktx"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vCo-qx-djZ">
+                                <rect key="frame" x="175" y="237" width="250" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="OBL-Bi-fcI"/>
+                                    <constraint firstAttribute="height" constant="44" id="w0c-lL-2yX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zXG-4o-78P">
+                                <rect key="frame" x="175" y="289" width="250" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="WeK-ZM-rNp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHw-b2-c0f">
+                                <rect key="frame" x="175" y="393" width="250" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="G7h-mH-EPt"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="TJH-Au-q4f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.35070900710000003" green="0.79530321839999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="ubE-dr-6zR" secondAttribute="centerX" id="1mX-w3-f4a"/>
+                            <constraint firstAttribute="centerX" secondItem="zXG-4o-78P" secondAttribute="centerX" id="D3Q-uG-hiz"/>
+                            <constraint firstItem="zXG-4o-78P" firstAttribute="top" secondItem="vCo-qx-djZ" secondAttribute="bottom" constant="8" symbolic="YES" id="DZJ-gp-k1g"/>
+                            <constraint firstItem="vCo-qx-djZ" firstAttribute="width" secondItem="hHw-b2-c0f" secondAttribute="width" id="Dr0-QK-HN4"/>
+                            <constraint firstAttribute="centerX" secondItem="N4A-ZX-Wm2" secondAttribute="centerX" id="JKQ-vj-JFJ"/>
+                            <constraint firstAttribute="centerX" secondItem="hHw-b2-c0f" secondAttribute="centerX" id="Kbz-Mg-z0r"/>
+                            <constraint firstAttribute="centerX" secondItem="vCo-qx-djZ" secondAttribute="centerX" id="LCG-ff-OQU"/>
+                            <constraint firstAttribute="centerX" secondItem="rGf-rE-Ese" secondAttribute="centerX" id="VOP-js-wVP"/>
+                            <constraint firstItem="ubE-dr-6zR" firstAttribute="top" secondItem="zXG-4o-78P" secondAttribute="bottom" constant="8" symbolic="YES" id="aSP-Gm-w64"/>
+                            <constraint firstItem="ubE-dr-6zR" firstAttribute="width" secondItem="vCo-qx-djZ" secondAttribute="width" id="hLc-Gr-KNM"/>
+                            <constraint firstItem="rGf-rE-Ese" firstAttribute="top" secondItem="N4A-ZX-Wm2" secondAttribute="bottom" constant="10" id="m0K-kR-zSV"/>
+                            <constraint firstItem="vCo-qx-djZ" firstAttribute="top" secondItem="rGf-rE-Ese" secondAttribute="bottom" constant="8" symbolic="YES" id="m3H-lP-YYi"/>
+                            <constraint firstItem="N4A-ZX-Wm2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="nHH-Fz-PuK"/>
+                            <constraint firstItem="hHw-b2-c0f" firstAttribute="top" secondItem="ubE-dr-6zR" secondAttribute="bottom" constant="8" id="oSW-XJ-U1p"/>
+                            <constraint firstItem="vCo-qx-djZ" firstAttribute="width" secondItem="zXG-4o-78P" secondAttribute="width" id="thg-eK-h3H"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="debugTextLabel" destination="hHw-b2-c0f" id="Tn1-dd-SjH"/>
+                        <outlet property="headerTextLabel" destination="rGf-rE-Ese" id="MoJ-mC-XuG"/>
+                        <outlet property="passwordTextField" destination="zXG-4o-78P" id="Act-4A-yut"/>
+                        <outlet property="usernameTextField" destination="vCo-qx-djZ" id="EJZ-vl-wNv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="285" y="421"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera_128.png" width="128" height="128"/>
+    </resources>
+</document>
