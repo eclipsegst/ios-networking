@@ -85,11 +85,73 @@ class LoginViewController: UIViewController {
                 if let requestToken = parsedResult["request_token"] as? String {
                     self.appDelegate.requestToken = requestToken
                     println("gotRequestToken: \(requestToken)")
+                    self.loginWithToken(self.appDelegate.requestToken!)
                 } else {
                     dispatch_async(dispatch_get_main_queue()) {
                         self.debugTextLabel.text = "Login Failed (Request Token)."
                     }
                     println("Could not find request_token in \(parsedResult)")
+                }
+            }
+        }
+        
+        // 7. Start the request
+        task.resume()
+    }
+    
+    func loginWithToken(requestToken: String) {
+        
+        // TASK: Login, then get a session id
+        println("Start loginWithToken")
+        // 1. Set the parameters
+        let methodParameters = [
+            "api_key": appDelegate.apiKey,
+            "request_token": requestToken,
+            "username": self.usernameTextField.text,
+            "password": self.passwordTextField.text
+        ]
+        
+        // 2. Build the URL
+        let urlString = appDelegate.baseURLString + "authentication/token/validate_with_login" + appDelegate.escapedParameters(methodParameters)
+        let url = NSURL(string: urlString)!
+        
+        // 3. Configure the request
+        let request = NSMutableURLRequest(URL: url)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+        // 4. Make the request
+        let task = session.dataTaskWithRequest(request) { data, response, downloadError in
+            if let error = downloadError {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.debugTextLabel.text = "Login Failed (Login Step)."
+                }
+                println("Could not complete the request \(error)")
+            } else {
+                // 5. Parse the data
+                var parsingError: NSError? = nil
+                let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                // 6. Use the data
+                if let success = parsedResult["success"] as? Bool {
+                    if success {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.debugTextLabel.text = "Login complete!"
+                        }
+
+                        println("Login complete!")
+                    } else {
+                        println("Login failed. Cannot find success in \(parsedResult)")
+                    }
+                } else {
+                    if let status_code = parsedResult["status_code"] as? Int {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.debugTextLabel.text = parsedResult["status_message"] as? String
+                        }
+                    } else {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.debugTextLabel.text = "Login Failed (Login Step)."
+                        }
+                        println("Could not find status_code in \(parsedResult)")
+                    }
                 }
             }
         }
