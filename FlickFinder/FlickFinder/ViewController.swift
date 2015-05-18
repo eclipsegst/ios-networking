@@ -11,9 +11,9 @@ import UIKit
 class ViewController: UIViewController {
     
     let BASE_URL = "https://api.flickr.com/services/rest/"
-    let METHOD_NAME = "flickr.galleries.getPhotos"
+    let METHOD_NAME = "flickr.photos.search"
     let API_KEY = "4f0751e10b9484ba6bf492246cb44aab"
-    let GALLERY_ID = "5704-72157622566655097"
+    let SAFE_SEARCH = "1"
     let EXTRAS = "url_m"
     let DATA_FORMAT = "json"
     let NO_JSON_CALLBACK = "1"
@@ -25,15 +25,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var latitudeTextField: UITextField!
     @IBOutlet weak var longitudeTextField: UITextField!
     
+    var tapRecognizer: UITapGestureRecognizer? = nil
 
     @IBAction func searchPhotosByPhraseButtonTouchUp(sender: AnyObject) {
-        
-        println("test search button 1")
         
         let methodArguments = [
             "method": METHOD_NAME,
             "api_key": API_KEY,
-            "gallery_id": GALLERY_ID,
+            "text": self.phraseTextField.text,
+            "safe_search": SAFE_SEARCH,
             "extras": EXTRAS,
             "format": DATA_FORMAT,
             "nojsoncallback": NO_JSON_CALLBACK
@@ -45,12 +45,89 @@ class ViewController: UIViewController {
 
     
     @IBAction func searchPhotosByLatLonButtonTouchUp(sender: AnyObject) {
-        println("test search button 2")
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        println("Initialize the tapRecognizer in viewDidLoad")
+        tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
+        tapRecognizer?.numberOfTapsRequired = 1
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Add tap recognizer to dimiss keyboard
+        self.addKeyboardDismissRecognizer()
+        
+        // Subscribe to keyboard events so we can adjust the view to show hidden controls
+        self.subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Remove tap recognizer
+        self.removeKeyboardDismissRecognizer()
+        
+        // Unsubscribe to all keyboard events
+        self.unsubscribeToKeyboardNotifications()
+    }
+    
+    // Dimissing the keyboard
+    func addKeyboardDismissRecognizer() {
+        println("Add the recognizer to dismiss the keyboard")
+        self.view.addGestureRecognizer(tapRecognizer!)
+    }
+    
+    func removeKeyboardDismissRecognizer() {
+        println("Remove the recognizer to dismiss the keyboard")
+        self.view.removeGestureRecognizer(tapRecognizer!)
+    }
+    
+    func handleSingleTap(recognizer: UITapGestureRecognizer) {
+        println("End editing here")
+        self.view.endEditing(true)
+    }
+    
+    // Shifting the keyboard so it does not hide controls
+    func subscribeToKeyboardNotifications() {
+        println("Subscribe to the KeyboardWillShow and KeyboardWillHide notifications")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubscribeToKeyboardNotifications() {
+        println("Unsubscribe to the KeyboardWillShow and KeyboardWillHide notifications")
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        println("Shift the view's frame up so that controls are shown")
+        if self.photoImageView.image != nil {
+            self.defaultLabel.alpha = 0.0
+        }
+        self.view.frame.origin.y -= self.getKeyboardHeight(notification) / 2
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        println("Shift the view's frame down so that the view is back to its original placement")
+        if self.photoImageView.image == nil {
+            self.defaultLabel.alpha = 1.0
+        }
+        self.view.frame.origin.y += self.getKeyboardHeight(notification) / 2
+    }
+    
+    func getKeyboardHeight(notification: NSNotification) -> CGFloat {
+        println("Get and return the keyboard's height from the notification")
+        let userInfo = notification.userInfo
+        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+        return keyboardSize.CGRectValue().height
+    }
+    
+    
  
     func getImageFromFlickBySearch(methodArguments: [String : AnyObject]) {
     
@@ -77,8 +154,11 @@ class ViewController: UIViewController {
 
                     // Determine the total number of photos
                     var totalPhotosVal = 0
-                    if let totalPhotos = photosDictionary["total"] as? Int {
-                        totalPhotosVal = totalPhotos
+//                    if let totalPhotos = photosDictionary["total"] as? Int {
+//                        totalPhotosVal = totalPhotos
+//                    }
+                    if let totalPhotos = photosDictionary["total"] as? String {
+                        totalPhotosVal = (totalPhotos as NSString).integerValue
                     }
                     
                     println("totalPhotosVal = \(totalPhotosVal)")
@@ -99,10 +179,9 @@ class ViewController: UIViewController {
                             // Update the UI on the main thread
                             if let imageData = NSData(contentsOfURL: imageURL!) {
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    println("Success, update the UI here...")
                                     self.photoImageView.image = UIImage(data: imageData)
-                                    self.photoTitleLabel.text = photoTitle
-                                    self.defaultLabel.text = ""
+                                    self.photoTitleLabel.text = "\(photoTitle!)"
+                                    self.defaultLabel.alpha = 0.0
                                 })
                             } else {
                                 println("Image does not exist at \(imageURL)")
@@ -113,6 +192,9 @@ class ViewController: UIViewController {
                     } else {
                         dispatch_async(dispatch_get_main_queue(), {
                             println("Failure, update the UI here...")
+                            self.photoTitleLabel.text = "No Photo Found. Search Again."
+                            self.defaultLabel.alpha = 1.0
+                            self.photoImageView.image = nil
                         })
                     }
                 } else {

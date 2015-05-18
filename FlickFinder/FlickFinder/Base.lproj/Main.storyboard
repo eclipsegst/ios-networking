@@ -78,9 +78,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QMS-iu-2er">
-                                <rect key="frame" x="16" y="65" width="568" height="297"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Longitude" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qV7-Tn-UFP">
                                 <rect key="frame" x="362" y="479" width="77" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -93,6 +90,9 @@
                                 <color key="textColor" red="1" green="0.81558728160000005" blue="0.19500237409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="QMS-iu-2er">
+                                <rect key="frame" x="16" y="65" width="568" height="297"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.50858454639999995" green="0.56474545440000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
