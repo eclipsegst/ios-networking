@@ -163,13 +163,51 @@ class ViewController: UIViewController {
         return "\(bottom_left_lon),\(bottom_left_lat),\(top_right_lon),\(top_right_lat)"
     }
  
-    func getImageFromFlickBySearch(methodArguments: [String : AnyObject]) {
+    // Function makes first request to get a random page, then it takes a request to get an image with the random page
+    func getImageFromFlickBySearch(methodArguments: [String: AnyObject]) {
+        let session = NSURLSession.sharedSession()
+        let urlString = BASE_URL + escapedParameters(methodArguments)
+        let url = NSURL(string: urlString)!
+        let request = NSURLRequest(URL:url)
+        
+        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+            if let error = downloadError {
+                println("Could not complete the request \(error)")
+            } else {
+                var parsingError: NSError? = nil
+                let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                if let photosDictionary = parsedResult.valueForKey("photos") as? [String:AnyObject] {
+                    if let totalPages = photosDictionary["pages"] as? Int {
+                        
+                        // Flickr API will only return up the 4000 images (100 per page * 40 page max)
+                        let pageLimit = min(totalPages, 40)
+                        let randomPage = Int(arc4random_uniform(UInt32(pageLimit))) + 1
+                        self.getImageFromFlickBySearchWithPage(methodArguments, pageNumber: randomPage)
+                    } else {
+                        println("Cannot find key 'pages' in \(photosDictionary)")
+                    }
+                } else {
+                    println("Cannot find key 'photos' in \(parsedResult)")
+                }
+                
+            }
+        }
+        
+        task.resume()
+    }
     
+    func getImageFromFlickBySearchWithPage(methodArguments: [String : AnyObject], pageNumber: Int) {
+    
+        // Add the page to the method's arguments
+        var withPageDictionary = methodArguments
+        withPageDictionary["page"] = pageNumber
+        
         // Get the shared NSURLSession to faciliate network activity
         let session = NSURLSession.sharedSession()
         
         // Create the NSURLRequest using properly escaped URL
-        let urlString = BASE_URL + escapedParameters(methodArguments)
+//        let urlString = BASE_URL + escapedParameters(methodArguments)
+        let urlString = BASE_URL + escapedParameters(withPageDictionary)
         let url = NSURL(string: urlString)!
         let request = NSURLRequest(URL: url)
         
