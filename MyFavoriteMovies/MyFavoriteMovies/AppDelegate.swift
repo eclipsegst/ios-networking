@@ -13,9 +13,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    // Constants for TheMovieDB
+    let apiKey = "84033d2b557db0b55b8b9b8d50f41e87"
+    let baseURLString = "http://api.themoviedb.org/3/"
+    let baseURLSecureString = "https://api.themoviedb.org/3/"
+    
+    // Need these for login
+    var requestToken: String? = nil
+    var sessionID: String? = nil
+    var userID: Int? = nil
+    
+    // Configuration for TheMovieDB
+    var config = Config()
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Update the configuration if necessary
+        config.updateIfDaysSinceUpdateExceeds(7)
+        
         return true
     }
 }
@@ -36,7 +51,7 @@ extension AppDelegate {
             let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
             
             // Append it
-            urlVars += [key + "=" + "\(escapedValue)"]
+            urlVars += [key + "=" + "\(escapedValue!)"]
         }
         
         return (!urlVars.isEmpty ? "?" : "") + join("&", urlVars)

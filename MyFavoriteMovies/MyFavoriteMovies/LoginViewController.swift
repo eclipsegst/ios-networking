@@ -22,8 +22,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Get the app delegate
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
-        // Do any additional setup after loading the view.
+        // Get the shared URL session
+        session = NSURLSession.sharedSession()
     }
     
     @IBAction func loginButtonTouch(sender: AnyObject) {
@@ -42,20 +46,21 @@ class LoginViewController: UIViewController {
             // Step 5: Got everything we need, go to the next view
         }
         
-        //self.getRequestToken()
+        self.getRequestToken()
     }
     
     // MARK: - Service Calls
     func getRequestToken() {
         // TASK: Get a request token, then store it (appDelegate.requestToken) and login with the token
-        
+
         // 1. Set the parameters
         let methodParameters = [
-            "key": "value"
+            "api_key": appDelegate.apiKey
         ]
         
         // 2. Build the URL
-        let urlString = "BUILD_THE_URL" + appDelegate.escapedParameters(methodParameters)
+        let urlString = appDelegate.baseURLString + "authentication/token/new" + appDelegate.escapedParameters(methodParameters)
+
         let url = NSURL(string: urlString)!
         
         // 3. Configure the request
@@ -65,12 +70,27 @@ class LoginViewController: UIViewController {
         // 4. Make the request
         let task = session.dataTaskWithRequest(request) { data, response, downloadError in
             if let error = downloadError {
-                println("getRequestToken: Print an error message")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.debugTextLabel.text = "Login Failed (Request Token)."
+                }
+                println("getRequestToken: Print an error message. \(error)")
             } else {
                 // 5. Parse the data
                 println("getRequestToken: Parse the data")
+                var parsingError: NSError? = nil
+                let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                
                 // 6. Use the data
                 println("getRequestToken: Use the data")
+                if let requestToken = parsedResult["request_token"] as? String {
+                    self.appDelegate.requestToken = requestToken
+                    println("gotRequestToken: \(requestToken)")
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.debugTextLabel.text = "Login Failed (Request Token)."
+                    }
+                    println("Could not find request_token in \(parsedResult)")
+                }
             }
         }
         
