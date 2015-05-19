@@ -168,12 +168,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MovieTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MovieTableViewCell" textLabel="IMi-GA-37n" rowHeight="100" style="IBUITableViewCellStyleDefault" id="BJt-8b-2Fb">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteTableViewCell" textLabel="IMi-GA-37n" rowHeight="100" style="IBUITableViewCellStyleDefault" id="BJt-8b-2Fb">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BJt-8b-2Fb" id="uhi-gj-diZ">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IMi-GA-37n">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" restorationIdentifier="FavoriteTableViewCell" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IMi-GA-37n">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -357,6 +357,9 @@
                                 <state key="normal" image="Heart Icon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="favoriteButtonTouchUpInside:" destination="aoW-Xi-ezm" eventType="touchUpInside" id="bwh-cV-ZIi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEc-tm-ocn" userLabel="UnFavorite Button">
                                 <rect key="frame" x="552" y="554" width="32" height="32"/>
@@ -364,6 +367,9 @@
                                     <constraint firstAttribute="width" constant="32" id="qzW-N8-WQ0"/>
                                 </constraints>
                                 <state key="normal" image="Heart Icon"/>
+                                <connections>
+                                    <action selector="unFavoriteButtonTouchUpInside:" destination="aoW-Xi-ezm" eventType="touchUpInside" id="Axn-yd-dbU"/>
+                                </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0St-k1-DSJ">
                                 <rect key="frame" x="290" y="286" width="20" height="20"/>

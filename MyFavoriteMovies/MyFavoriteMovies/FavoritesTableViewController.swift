@@ -9,89 +9,137 @@
 import UIKit
 
 class FavoritesTableViewController: UITableViewController {
+    
+    var appDelegate: AppDelegate!
+    var session: NSURLSession!
+    
+    var movies: [Movie] = [Movie]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        // Get the app delegate
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        // Get the shared URL session
+        session = NSURLSession.sharedSession()
+        
+        // Create and set the logout button
+         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Reply, target: self, action: "logoutButtonTouchUp")
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        // TASK: Get movies from favorite list, then populate the table
+        
+        // 1. Set the parameters
+        let methodParameters = [
+            "api_key": appDelegate.apiKey,
+            "session_id": appDelegate.sessionID!
+        ]
+        
+        // 2. Build the URL
+        
+        let urlString = appDelegate.baseURLSecureString + "account/\(appDelegate.userID!)/favorite/movies" + appDelegate.escapedParameters(methodParameters)
+        let url = NSURL(string: urlString)!
+        
+        // 3. Configure the request
+        let request = NSMutableURLRequest(URL: url)
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        // 4. Make the request
+        let task = session.dataTaskWithRequest(request) { data, response, downloadError in
+            
+            if let error = downloadError {
+                println(error)
+            } else {
+                
+                // 5. Parse the data
+                var parsingError: NSError? = nil
+                let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as! NSDictionary
+                
+                // 6. Use the data
+                if let error = parsingError {
+                    println("Could not parse the data \(error)")
+                } else {
+                    if let results = parsedResult["results"] as? [[String : AnyObject]] {
+                        self.movies = Movie.moviesFromResults(results)
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.tableView.reloadData()
+                        }
+                    } else {
+                        println("Could not find results in \(parsedResult)")
+                    }
+                }
+            }
+        }
+        
+        // 7. Start the request
+        task.resume()
+    }
+    
+    // MARK: - Logout
+    
+    func logoutButtonTouchUp() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        return movies.count
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        
+        // Get cell type
+        let cellReuseIdentifier = "FavoriteTableViewCell"
+        let movie = movies[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell
 
-        // Configure the cell...
+        // Set cell defaults
+        cell.textLabel!.text = movie.title
+        cell.imageView!.image = UIImage(named: "Film Icon")
+        cell.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        // TASK: Get the poster image, then populate the image view
+        if let posterPath = movie.posterPath {
+            let baseURL = NSURL(string: appDelegate.config.baseImageURLString)!
+            let url = baseURL.URLByAppendingPathComponent("w154").URLByAppendingPathComponent(posterPath)
+            
+            let request = NSURLRequest(URL: url)
+            
+            let task = session.dataTaskWithRequest(request) { data, response, downloadError in
+                if let error = downloadError {
+                    println(error)
+                } else {
+                    
+                    if let image = UIImage(data: data!) {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            cell.imageView!.image = image
+                        }
+                    }
+                }
+            }
+            
+            task.resume()
+            
+        }
 
         return cell
     }
-    */
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // Push the movie detail view
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MovieDetailViewController") as! MovieDetailViewController
+        controller.movie = movies[indexPath.row]
+        self.navigationController!.pushViewController(controller, animated: true)
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
