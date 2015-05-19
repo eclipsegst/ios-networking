@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="TheMovieManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_128.png" translatesAutoresizingMaskIntoConstraints="NO" id="xa4-4r-oXE">
+                                <rect key="frame" x="237" y="127" width="128" height="128"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Movie Manager" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNw-GA-Xtk">
+                                <rect key="frame" x="196" y="265" width="209" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="KGo-Wo-azu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HsC-Pt-jVK" userLabel="Login Button">
+                                <rect key="frame" x="160" y="316" width="280" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="D9M-9U-yau"/>
+                                    <constraint firstAttribute="height" constant="44" id="WjD-7w-rFM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Authenticate with TheMovieDB">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Idy-aI-T36"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8G-2I-6cF" userLabel="Debug Label">
+                                <rect key="frame" x="160" y="380" width="280" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="j1O-Ia-0sf"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="280" id="lbT-AQ-NN3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.34901960784313724" green="0.79607843137254897" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                        <constraints>
+                            <constraint firstItem="E8G-2I-6cF" firstAttribute="top" secondItem="HsC-Pt-jVK" secondAttribute="bottom" constant="20" id="3Zf-w3-FGr"/>
+                            <constraint firstItem="xa4-4r-oXE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="107" id="9wr-dI-nVJ"/>
+                            <constraint firstItem="RNw-GA-Xtk" firstAttribute="top" secondItem="xa4-4r-oXE" secondAttribute="bottom" constant="10" id="FEO-gZ-5f4"/>
+                            <constraint firstAttribute="centerX" secondItem="E8G-2I-6cF" secondAttribute="centerX" id="OyF-gC-AZx"/>
+                            <constraint firstAttribute="centerX" secondItem="HsC-Pt-jVK" secondAttribute="centerX" id="QcJ-01-aHP"/>
+                            <constraint firstItem="HsC-Pt-jVK" firstAttribute="top" secondItem="RNw-GA-Xtk" secondAttribute="bottom" constant="10" id="YGO-01-nJe"/>
+                            <constraint firstAttribute="centerX" secondItem="xa4-4r-oXE" secondAttribute="centerX" constant="-1" id="hDS-7U-kfb"/>
+                            <constraint firstAttribute="centerX" secondItem="RNw-GA-Xtk" secondAttribute="centerX" id="zb1-2q-xlP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="debugTextLabel" destination="E8G-2I-6cF" id="W11-PO-CVv"/>
+                        <outlet property="headerTextLabel" destination="RNw-GA-Xtk" id="8mS-it-ATi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Auth View Controller-->
+        <scene sceneID="TuQ-bA-kTK">
+            <objects>
+                <viewController storyboardIdentifier="TMDBAuthViewController" id="vCJ-t7-HZ4" customClass="TMDBAuthViewController" customModule="TheMovieManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xYX-4u-Mju"/>
+                        <viewControllerLayoutGuide type="bottom" id="t1l-Ba-unY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fDd-6A-l7X">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c3w-l7-NyX">
+                                <rect key="frame" x="16" y="20" width="568" height="572"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="c3w-l7-NyX" firstAttribute="top" secondItem="xYX-4u-Mju" secondAttribute="bottom" id="M8U-07-2iA"/>
+                            <constraint firstItem="t1l-Ba-unY" firstAttribute="top" secondItem="c3w-l7-NyX" secondAttribute="bottom" constant="8" symbolic="YES" id="Wyg-Ki-AkB"/>
+                            <constraint firstItem="c3w-l7-NyX" firstAttribute="leading" secondItem="fDd-6A-l7X" secondAttribute="leadingMargin" id="X9b-WK-Pkh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="c3w-l7-NyX" secondAttribute="trailing" id="ykG-Bt-FjX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="c3w-l7-NyX" id="khW-a3-2VF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="evP-wS-EYp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="577" y="696"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="camera_128.png" width="128" height="128"/>
+    </resources>
+</document>

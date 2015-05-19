@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>1C43508C-EBEF-4216-BF88-19EB4EEA3844</string>
+	<string>CF0AFF15-BE42-42A1-B32C-7AED4B801CA4</string>
 	<key>IDESourceControlProjectName</key>
-	<string>MyFavoriteMovies</string>
+	<string>TheMovieManager</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DE0EC22CB51C6CC49A1F0D0B4EF19086DE129701</key>
 		<string>https://github.com/eclipsegst/ios-networking.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MyFavoriteMovies/MyFavoriteMovies.xcodeproj</string>
+	<string>TheMovieManager/TheMovieManager.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DE0EC22CB51C6CC49A1F0D0B4EF19086DE129701</key>
