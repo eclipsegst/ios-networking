@@ -3,7 +3,7 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "camera_256.png"
+      "filename" : "camera_64.png"
     },
     {
       "idiom" : "universal",
@@ -13,7 +13,7 @@
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "camera_64.png"
+      "filename" : "camera_256.png"
     }
   ],
   "info" : {
