@@ -101,10 +101,10 @@
             </objects>
             <point key="canvasLocation" x="285" y="421"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--MoviesTabBarController-->
         <scene sceneID="Za7-Yv-DuK">
             <objects>
-                <tabBarController storyboardIdentifier="MoviesTabBarController" id="vSq-wW-5sx" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MoviesTabBarController" title="MoviesTabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vSq-wW-5sx" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="5wM-Ek-YWo"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="xXy-0H-8CF">
@@ -113,9 +113,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="Uq7-Zv-6Zi" kind="relationship" relationship="viewControllers" id="jDF-i7-kdH"/>
                         <segue destination="pUL-3m-O0Z" kind="relationship" relationship="viewControllers" id="I3u-LF-Rht"/>
                         <segue destination="OXo-kR-qA9" kind="relationship" relationship="viewControllers" id="IOu-Hq-06v"/>
+                        <segue destination="Uq7-Zv-6Zi" kind="relationship" relationship="viewControllers" id="jDF-i7-kdH"/>
                         <segue destination="EbP-bX-rFF" kind="relationship" relationship="viewControllers" id="alb-PD-jbV"/>
                     </connections>
                 </tabBarController>
@@ -152,7 +152,7 @@
                             <outlet property="delegate" destination="fBU-gR-gOb" id="xHF-EM-KIb"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Action" image="Genre Icon" id="1rw-tr-mr4"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Action" image="Genre Icon" id="1rw-tr-mr4"/>
                     <navigationItem key="navigationItem" title="Action" id="CwV-4b-L6W"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UjN-wU-ryg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -162,7 +162,7 @@
         <!--Favorites-->
         <scene sceneID="hRv-vj-NIZ">
             <objects>
-                <tableViewController id="BJ0-Ju-dME" customClass="GenreTableViewController" customModule="MyFavoriteMovies" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="BJ0-Ju-dME" customClass="FavoritesTableViewController" customModule="MyFavoriteMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="V9V-Qk-BOy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -188,7 +188,7 @@
                             <outlet property="delegate" destination="BJ0-Ju-dME" id="5Jf-hy-aVn"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Favorites" image="Heart Icon" id="zo1-4U-vLH"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="Favorites" image="Heart Icon" id="zo1-4U-vLH"/>
                     <navigationItem key="navigationItem" title="Favorites" id="MR4-VU-lx2"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hIk-7W-alh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -224,7 +224,7 @@
                             <outlet property="delegate" destination="RXp-Jy-YkZ" id="SeQ-KH-N7y"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Comedy" image="Genre Icon" id="Qh5-yw-TdW"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Comedy" image="Genre Icon" id="Qh5-yw-TdW"/>
                     <navigationItem key="navigationItem" title="Comedy" id="ZPm-QM-vyn"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DDB-2b-H4Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -270,8 +270,8 @@
         <!--Action-->
         <scene sceneID="4Ub-WA-RWg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uq7-Zv-6Zi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Action" image="Genre Icon" id="VvK-4A-OiD"/>
+                <navigationController id="Uq7-Zv-6Zi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="2" title="Action" image="Genre Icon" id="VvK-4A-OiD"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="baK-Xe-5zV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -309,7 +309,7 @@
         <scene sceneID="DtJ-Uq-Wfx">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="OXo-kR-qA9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Comedy" image="Genre Icon" id="yqU-Lo-Lnv"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="Comedy" image="Genre Icon" id="yqU-Lo-Lnv"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IaB-mi-BWH">
@@ -323,12 +323,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nCD-dO-jKL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1872" y="1413"/>
+            <point key="canvasLocation" x="1880" y="1539"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="xHV-cp-3XI">
             <objects>
-                <viewController storyboardIdentifier="MovieDetailViewController" id="aoW-Xi-ezm" customClass="MovieDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailViewController" id="aoW-Xi-ezm" customClass="MovieDetailViewController" customModule="MyFavoriteMovies" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7nt-kL-96j"/>
                         <viewControllerLayoutGuide type="bottom" id="SA7-it-frc"/>
@@ -392,7 +392,7 @@
         <scene sceneID="3y1-p2-xY0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EbP-bX-rFF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" image="Heart Icon" id="1MO-7h-VEM"/>
+                    <tabBarItem key="tabBarItem" tag="3" title="Favorites" image="Heart Icon" id="1MO-7h-VEM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3rW-ZK-LoC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

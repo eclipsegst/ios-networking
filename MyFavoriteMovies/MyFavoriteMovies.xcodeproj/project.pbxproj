@@ -31,6 +31,8 @@
 		56B68D791B0A9CE200CD7749 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56B68D6D1B0A9CE200CD7749 /* Images.xcassets */; };
 		56B68D841B0AACD600CD7749 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B68D831B0AACD600CD7749 /* MovieDetailViewController.swift */; };
 		56B68D861B0AB36500CD7749 /* GenreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B68D851B0AB36500CD7749 /* GenreTableViewController.swift */; };
+		56B68D881B0ADFA700CD7749 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B68D871B0ADFA700CD7749 /* Movie.swift */; };
+		56B68D8A1B0AFB6800CD7749 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B68D891B0AFB6800CD7749 /* FavoritesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		56B68D6D1B0A9CE200CD7749 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		56B68D831B0AACD600CD7749 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		56B68D851B0AB36500CD7749 /* GenreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreTableViewController.swift; sourceTree = "<group>"; };
+		56B68D871B0ADFA700CD7749 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		56B68D891B0AFB6800CD7749 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 				56B68D3C1B0A5D1300CD7749 /* LaunchScreen.xib */,
 				56B68D5D1B0A75DE00CD7749 /* Config.swift */,
 				56B68D311B0A5D1300CD7749 /* Supporting Files */,
+				56B68D871B0ADFA700CD7749 /* Movie.swift */,
 			);
 			path = MyFavoriteMovies;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				56B68D551B0A67A200CD7749 /* LoginViewController.swift */,
 				56B68D831B0AACD600CD7749 /* MovieDetailViewController.swift */,
 				56B68D851B0AB36500CD7749 /* GenreTableViewController.swift */,
+				56B68D891B0AFB6800CD7749 /* FavoritesTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -304,8 +310,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56B68D881B0ADFA700CD7749 /* Movie.swift in Sources */,
 				56B68D561B0A67A200CD7749 /* LoginViewController.swift in Sources */,
 				56B68D841B0AACD600CD7749 /* MovieDetailViewController.swift in Sources */,
+				56B68D8A1B0AFB6800CD7749 /* FavoritesTableViewController.swift in Sources */,
 				56B68D5E1B0A75DE00CD7749 /* Config.swift in Sources */,
 				56B68D861B0AB36500CD7749 /* GenreTableViewController.swift in Sources */,
 				56B68D361B0A5D1300CD7749 /* ViewController.swift in Sources */,
