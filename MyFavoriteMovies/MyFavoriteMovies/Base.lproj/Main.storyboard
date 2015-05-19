@@ -349,13 +349,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEc-tm-ocn" userLabel="UnFavorite Button">
-                                <rect key="frame" x="552" y="554" width="32" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="qzW-N8-WQ0"/>
-                                </constraints>
-                                <state key="normal" image="Heart Icon"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jPy-F2-RtT" userLabel="Favorite Button">
                                 <rect key="frame" x="552" y="554" width="32" height="32"/>
                                 <constraints>
@@ -365,6 +358,16 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEc-tm-ocn" userLabel="UnFavorite Button">
+                                <rect key="frame" x="552" y="554" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="qzW-N8-WQ0"/>
+                                </constraints>
+                                <state key="normal" image="Heart Icon"/>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0St-k1-DSJ">
+                                <rect key="frame" x="290" y="286" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -383,6 +386,13 @@
                             <constraint firstItem="jPy-F2-RtT" firstAttribute="top" secondItem="WEc-tm-ocn" secondAttribute="top" id="zsf-R5-o6U"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="0St-k1-DSJ" id="hxa-Ig-ytq"/>
+                        <outlet property="favoriteButton" destination="jPy-F2-RtT" id="PZ2-sD-YHl"/>
+                        <outlet property="posterImageView" destination="dDk-mK-YkG" id="Syn-p2-5E6"/>
+                        <outlet property="titleLabel" destination="jMz-W4-yqI" id="OUr-Eh-DO8"/>
+                        <outlet property="unFavoriteButton" destination="WEc-tm-ocn" id="cfX-Kh-7xa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ePp-0A-cWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
